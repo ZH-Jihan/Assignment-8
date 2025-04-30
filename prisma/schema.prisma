@@ -20,7 +20,7 @@ model Customer {
   phone      String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  Bike       Bike[]
+  bike       Bike[]
 
   @@map("customers")
 }
@@ -34,7 +34,7 @@ model Bike {
   customerId    String
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
-  ServiceRecord ServiceRecord[]
+  serviceRecord ServiceRecord[]
 
   @@map("bikes")
 }

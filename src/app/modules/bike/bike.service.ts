@@ -27,20 +27,17 @@ const getSingleBike = async (id: string) => {
 
 // Update
 const updateSingleBike = async (id: string, payload: any) => {
-  await prisma.customer.findUniqueOrThrow({
-    where: { customerId: payload.customerId },
-  });
   const existBike = await prisma.bike.findUniqueOrThrow({
     where: { bikeId: id },
   });
-
-  if (existBike.customerId === payload.customerID) {
-    const result = await prisma.bike.update({
-      where: { bikeId: id },
-      data: payload,
-    });
-    return result;
-  }
+  await prisma.customer.findUniqueOrThrow({
+    where: { customerId: existBike.customerId },
+  });
+  const result = await prisma.bike.update({
+    where: { bikeId: id },
+    data: payload,
+  });
+  return result;
 };
 
 // Delete Single
