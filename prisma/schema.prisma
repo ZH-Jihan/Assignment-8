@@ -21,6 +21,8 @@ model Customer {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   Bike       Bike[]
+
+  @@map("customers")
 }
 
 model Bike {
@@ -33,6 +35,8 @@ model Bike {
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
   ServiceRecord ServiceRecord[]
+
+  @@map("bikes")
 }
 
 model ServiceRecord {
@@ -45,6 +49,8 @@ model ServiceRecord {
   status         Status    @default(pending)
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
+
+  @@map("serviceRecords")
 }
 
 enum Status {
