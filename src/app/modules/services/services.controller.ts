@@ -43,6 +43,14 @@ const updateService = asyncHandler(async (req: Request, res: Response) => {
     data: result,
   });
 });
+const getPendingServices = asyncHandler(async (req: Request, res: Response) => {
+  const result = await ServiceServices.getPendingServices();
+  ApiResponse(res, {
+    statusCode: StatusCodes.OK,
+    message: "Overdue or pending services fetched successfully",
+    data: result,
+  });
+});
 
 const deleteService = asyncHandler(async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -57,6 +65,7 @@ export {
   createService,
   deleteService,
   getAllServices,
+  getPendingServices,
   getSingleService,
   updateService,
 };

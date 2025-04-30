@@ -39,16 +39,30 @@ const updateSingleBike = async (id: string, payload: any) => {
   await prisma.customer.findUniqueOrThrow({
     where: { customerId: existBike.customerId },
   });
-    if (payload.completionDate) {
-      const result = await prisma.serviceRecord.update({
-        where: { serviceId: id },
-        data: {
-          ...payload,
-          status: "done",
-        },
-      });
-      return result;
+  if (payload.completionDate) {
+    const result = await prisma.serviceRecord.update({
+      where: { serviceId: id },
+      data: {
+        ...payload,
+        status: "done",
+      },
+    });
+    return result;
   }
+};
+
+// Pending service ovsarvation
+const getPendingServices = async () => {
+  const sevenDaysAgo = new Date();
+  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+  const services = await prisma.serviceRecord.findMany({
+    where: {
+      status: { in: ["pending", "in_progress"] },
+      serviceDate: { lt: sevenDaysAgo },
+    },
+  });
+  return services;
 };
 
 // Delete Single
@@ -65,4 +79,5 @@ export const ServiceServices = {
   getAllServices,
   getSingleService,
   updateSingleBike,
+  getPendingServices,
 };

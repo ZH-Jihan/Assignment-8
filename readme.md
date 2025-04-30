@@ -1,4 +1,4 @@
-# 🚀 BikeServ - Bike Servicing Management System
+# 🚀 Bike Servicing Management System
 
 ## 📝 Project Summary
 

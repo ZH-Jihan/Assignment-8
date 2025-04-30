@@ -3,6 +3,7 @@ import {
   createService,
   deleteService,
   getAllServices,
+  getPendingServices,
   getSingleService,
   updateService,
 } from "./services.controller";
@@ -10,6 +11,8 @@ import {
 const router = Router();
 
 router.route("/").get(getAllServices).post(createService);
+
+router.route("/status").get(getPendingServices);
 
 router
   .route("/:id")
